@@ -1,16 +1,15 @@
 package com.serrodcal.dto;
 
-import com.ibm.asyncutil.util.Either;
 import io.smallrye.mutiny.Uni;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class BookingRequest {
 
     private String hotelId;
-    private LocalDate checkinDate;
-    private LocalDate checkoutDate;
+    private LocalDateTime checkinDate;
+    private LocalDateTime checkoutDate;
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public BookingRequest() {
@@ -32,18 +31,18 @@ public class BookingRequest {
     }
 
     public void setCheckinDate(String checkinDate) {
-        this.checkinDate = LocalDate.parse(checkinDate, formatter);
+        this.checkinDate = LocalDateTime.parse(checkinDate, formatter);
     }
 
     public void setCheckoutDate(String checkoutDate) {
-        this.checkoutDate = LocalDate.parse(checkoutDate, formatter);
+        this.checkoutDate = LocalDateTime.parse(checkoutDate, formatter);
     }
 
-    public LocalDate getCheckinDate() {
+    public LocalDateTime getCheckinDate() {
         return checkinDate;
     }
 
-    public LocalDate getCheckoutDate() {
+    public LocalDateTime getCheckoutDate() {
         return checkoutDate;
     }
 
@@ -51,7 +50,7 @@ public class BookingRequest {
         if (checkoutDate.isBefore(checkinDate)) {
             return Uni.createFrom().failure(new Exception("Check-out date must be strictly after the checkin date"));
         }
-        if (checkinDate.isBefore(LocalDate.now())) {
+        if (checkinDate.isBefore(LocalDateTime.now())) {
             return Uni.createFrom().failure(new Exception("Check-in date must be today or after"));
         }
 
