@@ -4,6 +4,35 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
+## Database with Docker-compose
+
+First we will need a PostgreSQL database; you can launch one easily if you have Docker-compose installed:
+```shell script
+docker-compose up -d
+```
+
+## Build and start the frontend
+
+Pre-requisites : npm v6.9.0
+
+> cd hotel-quarkus
+
+> npm install
+
+You can then start the frontend, this start a node server on port 8081 :
+
+> npm run serve
+
+You can also build and package the frontend, then copy the generated files to the backend folder :
+
+> cd hotel-quarkus
+
+> npm install
+
+> npm run build
+
+> cp -R dist/* ../src/main/resources/META-INF/resources/
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
